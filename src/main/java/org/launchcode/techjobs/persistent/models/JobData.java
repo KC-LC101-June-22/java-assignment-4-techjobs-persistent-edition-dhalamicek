@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent.models;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
 // This is a change made in sandbox.
@@ -7,7 +8,8 @@ import java.util.ArrayList;
 /**
  * Created by LaunchCode
  */
-public class JobData {
+@Entity
+public class JobData extends AbstractEntity{
 
 
     /**
@@ -50,9 +52,9 @@ public class JobData {
         if (fieldName.equals("name")){
             theValue = job.getName();
         } else if (fieldName.equals("employer")){
-            theValue = job.getEmployer().toString();
+            theValue = job.getEmployer();
         } else {
-            theValue = job.getSkills().toString();
+            theValue = job.getSkills();
         }
 
         return theValue;
