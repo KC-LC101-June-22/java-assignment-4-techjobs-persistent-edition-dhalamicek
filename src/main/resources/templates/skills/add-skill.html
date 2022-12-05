@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/>/www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+    <div class="form-group">
+        <input type="hidden" th:field="${jobSkill.job}">
+        <select th:field="${jobSkill.job}">
+            <option th:each="skill : ${skills}"
+                    th:value="${skill.id"
+                    th:text="${skill.name"
+            ></option>
+        </select>
+    </div>
+    <input type="submit" value="Add Skill">
+</form>
+
+
+
+
+</body>
+</html>

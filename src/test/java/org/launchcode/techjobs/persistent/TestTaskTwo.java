@@ -556,4 +556,4 @@ public class TestTaskTwo extends AbstractTest {
             assertTrue(queryFound, "Task 2 SQL query is incorrect. Test your query against your database to find the error.");
         }
     }
-}
+

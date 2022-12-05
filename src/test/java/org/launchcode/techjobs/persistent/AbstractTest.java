@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent;
 
+import javax.persistence.MappedSuperclass;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -8,7 +9,9 @@ import java.nio.file.Path;
 /**
  * Created by Chris Bay
  */
+
 public class AbstractTest {
+
 
     protected static String getFileContents(String fileName) throws IOException {
         Path path = FileSystems.getDefault().getPath(fileName);

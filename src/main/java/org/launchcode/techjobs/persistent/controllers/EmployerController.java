@@ -2,7 +2,9 @@ package org.launchcode.techjobs.persistent.controllers;
 
 
 import org.launchcode.techjobs.persistent.models.Employer;
+import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,25 @@ public class EmployerController {
     @Autowired
     private EmployerRepository employerRepository;
 
+    @Autowired
+    JobRepository jobRepository;
+
     @GetMapping("index")
-    public String index (Model model) {
-        model.addAttribute("title", "All Employers");
-        model.addAttribute("employers", employerRepository.findAll());
+    public String index(@RequestParam(required = false) Integer jobId, Model model) {
+
+        if (jobId == null) {
+            model.addAttribute("title", "All Employers");
+            model.addAttribute("employers", employerRepository.findAll());
+        } else {
+            Optional<Job> result = jobRepository.findById(jobId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Job ID: " + jobId);
+            } else {
+                Job job = result.get();
+                model.addAttribute("title", "Employers: " + job.getName());
+                model.addAttribute("employers", job.getEmployer());
+            }
+        }
         return "employers/index";
     }
 
@@ -32,7 +49,7 @@ public class EmployerController {
     public String displayAddEmployerForm(Model model) {
         model.addAttribute("title", "Add Employer");
         model.addAttribute(new Employer());
-        model.addAttribute("location", employerRepository.findAll());
+        //model.addAttribute("location", employerRepository.findAll());
         return "employers/add";
     }
 
@@ -48,24 +65,21 @@ public class EmployerController {
     }
 
     @PostMapping("view/{employerId}")
-    public String displayViewEmployer(@RequestParam(required = false) Integer employerId, Model model) {
+    public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
-        if (employerId != null) {
-            model.addAttribute("title", "Employer");
-            model.addAttribute("employer", employerRepository.findById(employerId));
 
+        Optional optEmployer = employerRepository.findById(employerId);
+        if (optEmployer.isPresent()) {
+            Employer employer = (Employer) optEmployer.get();
+            model.addAttribute("employer", "View Employer");
+            return "employers/view";
         } else {
-            Optional<Employer> result = employerRepository.findById(employerId);
-            if (result.isEmpty()) {
-                model.addAttribute("title", "Invalid Employer ID: " + (employerId));
-            } else {
-                Employer employer = result.get();
-                model.addAttribute("title", "Employer: " + (employer.getName()));
-            }
+            return "redirect:../";
+
         }
-        return "view/{employerId}";
     }
 }
+
 
 
 
