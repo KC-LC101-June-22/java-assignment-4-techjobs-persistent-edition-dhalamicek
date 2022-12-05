@@ -10,10 +10,13 @@
 <p th:unless="${employers} and ${employers.size()}">no employers!</p>
 
 <div class="container body-content">
-    <h2>Employers</h2>
+    <h2>Employer</h2>
     <ul>
         <li th:each="employer : ${employers}">
             <a th:href="@{'/employers/view/' + ${employer.id}}" th:text="${employer.name}"></a>
+        </li>
+        <li th:each="employer : ${employers}">
+            <a th:href="'/jobs?employerId=' + ${employer.id}" th:text="${employer.name}"></a>
         </li>
     </ul>
     <a th:href="@{'/employers/add'}">Add Employers</a>

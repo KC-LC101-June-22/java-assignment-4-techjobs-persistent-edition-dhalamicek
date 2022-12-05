@@ -1,11 +1,5 @@
 package org.launchcode.techjobs.persistent.models;
 
-import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
-import org.launchcode.techjobs.persistent.models.data.JobRepository;
-import org.launchcode.techjobs.persistent.models.data.SkillRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.Entity;
 import java.util.ArrayList;
 
 // This is a change made in sandbox.
@@ -13,8 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by LaunchCode
  */
-@Entity
-public class JobData extends AbstractEntity{
+public class JobData {
 
 
     /**
@@ -57,9 +50,9 @@ public class JobData extends AbstractEntity{
         if (fieldName.equals("name")){
             theValue = job.getName();
         } else if (fieldName.equals("employer")){
-            theValue = job.getEmployer();
+            theValue = job.getEmployer().toString();
         } else {
-            theValue = job.getSkill();
+            theValue = job.getSkill().toString();
         }
 
         return theValue;

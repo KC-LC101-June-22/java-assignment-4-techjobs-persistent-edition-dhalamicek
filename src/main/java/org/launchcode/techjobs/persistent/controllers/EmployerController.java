@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 
 @Controller
@@ -46,10 +47,23 @@ public class EmployerController {
         return "redirect:";
     }
 
-    @GetMapping("view/{employerId}")
-    public String displayViewEmployer(Model model, @PathVariable int employerId) {
+    @PostMapping("view/{employerId}")
+    public String displayViewEmployer(@RequestParam(required = false) Integer employerId, Model model) {
 
-   return "employers/view";
+        if (employerId != null) {
+            model.addAttribute("title", "Employer");
+            model.addAttribute("employer", employerRepository.findById(employerId));
+
+        } else {
+            Optional<Employer> result = employerRepository.findById(employerId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Employer ID: " + (employerId));
+            } else {
+                Employer employer = result.get();
+                model.addAttribute("title", "Employer: " + (employer.getName()));
+            }
+        }
+        return "view/{employerId}";
     }
 }
 

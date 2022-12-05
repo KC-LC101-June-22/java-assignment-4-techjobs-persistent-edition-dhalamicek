@@ -15,14 +15,15 @@
     </div>
 
     <div class="form-group">
-        <label th:for="location">Employer Location
-        <input class="form-control" th:field="${employer.location}">
+        <label th:for="location">Location
+        <select th:field="${employer.location}" class="form-control">
+          </select>
         </label>
         <p th:errors="${employer.location}" class="error"></p>
     </div>
 
     <div class="form-group">
-    <input type="submit" value="Add Employer" class="btn btn-success">
+    <input type="submit" value="Add Employer">
     </div>
 </form>
 

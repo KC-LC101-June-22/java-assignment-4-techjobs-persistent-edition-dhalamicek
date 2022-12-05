@@ -10,46 +10,52 @@
 <form method="post" style="max-width:600px;">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:field="${job.name}" />
+        <input class="form-control" th:field="${job.name}">
         <span th:errors="${job.name}" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label th:for="employer">Employer</label>
-        <select th:field="${employer.name}">
+        <label th:for="employer">Employer
+        <select th:field="${job.employer}">
             <option th:each="employer : ${employers}"
-                    th:text="${employer.name}"
-                    th:value="${employer}"></option>
+                    th:text="${job.employer.name}"
+                    th:value="${job.employer.id}"></option>
         </select>
-        <a th:href="@{'/employers/add'}">Add Employers</a>
-    </div>
+            <span th:errors="form-control" th:field="${job.employer.name}"></span>
+        </label>
 
-    <div class="form-group">
     <label th:for="location">Location</label>
-        <select th:field="${employer.location}">
+        <select th:field="${job.employer}">
             <option th:each="employer : ${employers}"
-                    th:text="${employer.location}"
-                    th:value="${employer}"></option>
+                    th:text="${job.employer.location}"
+                    th:value="${job.employer.id}"></option>
         </select>
+        <span th:errors="form-control" th:field="${job.employer.location}"></span>
+        </label>
         <a th:href="@{'/employers/add'}">Add Employers</a>
     </div>
 
     <div class="form-group">
         <label th:for="skills">Skills</label>
+        <select th:field="${job.skill}">
         <th:block th:each="skill : ${skills}">
-            <input type="checkbox" name="skills" th:value="${skill.id}">
-            <label th:text="${skill.name}"></label>
+            <input type="checkbox" name="skills" th:value="${job.skill.id}">
+            <label th:text="${job.skill.name}"></label>
         </th:block>
+            <span th:errors="form-control" th:field="${job.skill.name}"></span>
         <a th:href="@{'/skills/add'}">Add Skills</a>
+        </select>
     </div>
 
     <div class="form-group">
-        <label th:for="description">Description
-        <input th:field="${skill.description}" class = "form-control">
-        </label>
+        <label th:for="description">Description</label>
+        <input th:field="${job.skill}" class = "form-control">
+        <option th:each="skill : ${skills}"
+                th:text="${job.skill.description}"
+                th:value="${job.skill.id}"></option>
     </div>
 
-    <input type="submit" value="Add Job" />
+    <input type="submit" value="Add Job">
 </form>
 
 </body>
