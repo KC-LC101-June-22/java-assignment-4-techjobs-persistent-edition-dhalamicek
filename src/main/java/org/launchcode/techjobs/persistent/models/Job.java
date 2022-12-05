@@ -1,8 +1,7 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -19,7 +18,7 @@ public class Job extends AbstractEntity{
     public Job() {
     }
 
-    public Job(String anEmployer, String someSkills) {
+    public Job(String name, String anEmployer, String someSkills) {
         super();
         this.employer = anEmployer;
         this.skill = someSkills;}
@@ -38,7 +37,9 @@ public class Job extends AbstractEntity{
         return skill;
     }
 
-
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
 //public String getName() {
         //return name;}
 
