@@ -11,7 +11,7 @@ public class Job extends AbstractEntity {
 
 
 
-    private String skills;
+    private String skill;
 
 
     public Job() {
@@ -20,6 +20,8 @@ public class Job extends AbstractEntity {
     public Job(String jobName) {
         super();
         this.jobName = jobName;
+//        this.employer = employer;
+//        this.skill = skill;
 
     }
 
@@ -49,5 +51,9 @@ public String getSkills(){
 //                ", skills='" + skills + '\'' +
 //                '}';
 //    }
+@Override
+public boolean equals(Object o) {
+    return super.equals(o);
+}
 }
 
