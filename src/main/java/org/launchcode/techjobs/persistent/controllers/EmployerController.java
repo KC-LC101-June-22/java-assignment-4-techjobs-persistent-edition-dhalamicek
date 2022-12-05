@@ -24,7 +24,7 @@ public class EmployerController {
     private EmployerRepository employerRepository;
 
     @Autowired
-    JobRepository jobRepository;
+    private JobRepository jobRepository;
 
     @GetMapping("index")
     public String index(@RequestParam(required = false) Integer jobId, Model model) {
@@ -49,7 +49,7 @@ public class EmployerController {
     public String displayAddEmployerForm(Model model) {
         model.addAttribute("title", "Add Employer");
         model.addAttribute(new Employer());
-        //model.addAttribute("location", employerRepository.findAll());
+        model.addAttribute("location", employerRepository.findAll());
         return "employers/add";
     }
 
