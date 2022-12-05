@@ -1,59 +1,63 @@
 package org.launchcode.techjobs.persistent.models;
 
-import javax.persistence.*;
+import org.springframework.ui.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 public class Job extends AbstractEntity {
 
-    private String employer;
+//    @ManyToOne
+//    @JoinColumn(name = "employer_id")
+    @Transient
+    @NotNull
+    private Employer employer = new Employer();
 
+    public static List<Skill> skills = new ArrayList<>();
 
-
-    private String skill;
-
-
-    public Job() {
+    public static List<Skill> getSkills() {
+        return skills;
     }
 
-    public Job(String jobName) {
-        super();
-        this.jobName = jobName;
-//        this.employer = employer;
-//        this.skill = skill;
-
+    public static void setSkills(List<Skill> skills) {
+        Job.skills = skills;
     }
 
+    public Job() {};
+    public Job (Employer employer, String location, Model model) {
 
+        model.addAttribute("location", location);
 
+        model.addAttribute(skills);
+        model.addAttribute("description", skills);
+    }
 
-    public String getEmployer() {
+    public Employer getEmployer () {
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(Employer employer) {
         this.employer = employer;
     }
-
-public String getSkills(){
-    return skills;
-        }
-
-        public void setSkills(String skills){
-        this.skills=skills;
-        }
-
-//    @Override
-//    public String toString() {
-//        return "Job{" +
-//                "employer='" + employer + '\'' +
-//                ", skills='" + skills + '\'' +
-//                '}';
-//    }
-@Override
-public boolean equals(Object o) {
-    return super.equals(o);
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
 

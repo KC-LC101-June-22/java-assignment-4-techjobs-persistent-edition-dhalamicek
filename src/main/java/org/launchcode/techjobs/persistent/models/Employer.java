@@ -11,7 +11,13 @@ import javax.validation.constraints.Size;
 public class Employer extends AbstractEntity {
 
 
+    public String getLocation() {
+        return location;
+    }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     @NotBlank
     @Size(min = 3, message = "Location must contain at least three characters")
@@ -21,13 +27,16 @@ public class Employer extends AbstractEntity {
     }
 
     public Employer(String location) {
-        super();
+
         this.location = location;
     }
 
     @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
+    public String toString(){
+        return location;
     }
 }
+
+
+
 

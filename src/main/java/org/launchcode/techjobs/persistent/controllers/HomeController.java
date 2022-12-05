@@ -50,7 +50,7 @@ model.addAttribute("jobs", jobs);
     @PostMapping("add")
     public String processAddJobForm(@RequestParam String jobName) {
 
-        jobs.add(new Job(jobName));
+        jobs.add(new Job());
         return "redirect:";
     }
 

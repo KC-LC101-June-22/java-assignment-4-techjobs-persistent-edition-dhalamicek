@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+import static org.launchcode.techjobs.persistent.models.Job.skills;
+
 
 @Controller
 @RequestMapping("skills")
@@ -42,7 +44,7 @@ public class SkillController {
             } else {
                 Job job = result.get();
                 model.addAttribute("title", "Skills in job: " + job.getName());
-                model.addAttribute("skills", job.getSkills());
+                model.addAttribute("skills", skills);
             }
         }
         return "skills/index";

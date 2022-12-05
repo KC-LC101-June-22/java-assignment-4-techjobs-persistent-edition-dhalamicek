@@ -1,5 +1,5 @@
 -- Part 1: Test it with SQL
---columns: id - int, employer - string, name - string, skills - string
+--columns: id - int, employer - varchar, name - varchar, skills - varchar, skill - varchar
 
 -- Part 2: Test it with SQL
 
