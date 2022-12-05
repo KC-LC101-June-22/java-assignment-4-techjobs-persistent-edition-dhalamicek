@@ -1,5 +1,10 @@
 package org.launchcode.techjobs.persistent.models;
 
+import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.JobRepository;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import java.util.ArrayList;
 
@@ -54,7 +59,7 @@ public class JobData extends AbstractEntity{
         } else if (fieldName.equals("employer")){
             theValue = job.getEmployer();
         } else {
-            theValue = job.getSkills();
+            theValue = job.getSkill();
         }
 
         return theValue;
@@ -78,7 +83,7 @@ public class JobData extends AbstractEntity{
                 results.add(job);
             } else if (job.getEmployer().toString().toLowerCase().contains(lower_val)) {
                 results.add(job);
-            } else if (job.getSkills().toString().toLowerCase().contains(lower_val)) {
+            } else if (job.getSkill().toString().toLowerCase().contains(lower_val)) {
                 results.add(job);
             } else if (job.toString().toLowerCase().contains(lower_val)) {
                 results.add(job);

@@ -10,9 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
-import static org.launchcode.techjobs.persistent.controllers.ListController.columnChoices;
 
 @Controller
 @RequestMapping("employers")
@@ -33,6 +31,7 @@ public class EmployerController {
     public String displayAddEmployerForm(Model model) {
         model.addAttribute("title", "Add Employer");
         model.addAttribute(new Employer());
+        model.addAttribute("location", employerRepository.findAll());
         return "employers/add";
     }
 

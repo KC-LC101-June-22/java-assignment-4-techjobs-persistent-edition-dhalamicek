@@ -6,8 +6,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
+
 @Entity
 public class Employer extends AbstractEntity {
+
+    @NotBlank
+    @Size(min = 3, message = "Location must contain at least three characters")
+    private String location;
 
     public String getLocation() {
         return location;
@@ -17,21 +22,12 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
-    @NotBlank
-    @Size(min = 3, message = "Location must contain at least 3 characters.")
-    private String location;
-
-
-
-    public Employer(String aLocation) {
-        super();
-        this.location = aLocation;
+    @Override
+    public String toString() {
+        return "Employer{" +
+                "location='" + location + '\'' +
+                '}';
     }
-
-    public Employer() {
-
-    }
-
-
-
 }
+
+
