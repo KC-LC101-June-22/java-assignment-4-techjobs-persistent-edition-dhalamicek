@@ -2,6 +2,7 @@ package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
@@ -30,12 +31,14 @@ public class HomeController {
     @Autowired
     private SkillRepository skillRepository;
 
-    @GetMapping("")
+    @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("title", "All Jobs");
         model.addAttribute("jobs", jobRepository.findAll());
         return "index";
     }
+
+
 
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
@@ -47,7 +50,7 @@ public class HomeController {
     }
 
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @RequestParam int employerId, Errors errors, Model model) {
+    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @RequestParam int employerId, @RequestParam List<Integer> skills, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
 
@@ -61,11 +64,9 @@ public class HomeController {
             Employer employer = new Employer();
             newJob.setEmployer(employer);
         }
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Job");
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkills(skillObjs);
 
-            return "jobs/add";
-        }
         jobRepository.save(newJob);
 
         return "redirect:";
