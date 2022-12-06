@@ -33,7 +33,7 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model) {
-
+//model.addAttribute("")
         return "list";
     }
 
