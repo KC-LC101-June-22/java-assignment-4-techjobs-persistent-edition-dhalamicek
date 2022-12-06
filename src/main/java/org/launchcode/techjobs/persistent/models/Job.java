@@ -1,57 +1,46 @@
 package org.launchcode.techjobs.persistent.models;
 
-import org.springframework.ui.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
 @Entity
 public class Job extends AbstractEntity {
 
-//    @ManyToOne
-//    @JoinColumn(name = "employer_id")
-    @Transient
-    @NotNull
-    private Employer employer = new Employer();
+@ManyToOne
+   private Employer employer;
 
-    public static List<Skill> skills = new ArrayList<>();
-
-    public static List<Skill> getSkills() {
-        return skills;
-    }
-
-    public static void setSkills(List<Skill> skills) {
-        Job.skills = skills;
-    }
+@ManyToMany
+    private List<Skill> skills;
 
     public Job() {};
-    public Job (Employer employer, String location, Model model) {
+    public Job (Employer employer, List<Skill> skills) {
+        super();
+        this.employer = employer;
+        this.skills = skills;
+    }
 
-        model.addAttribute("location", location);
+    public List<Skill> getSkills() {
+        return this.skills;
+    }
 
-        model.addAttribute(skills);
-        model.addAttribute("description", skills);
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 
     public Employer getEmployer () {
-        return employer;
+        return this.employer;
     }
 
     public void setEmployer(Employer employer) {
         this.employer = employer;
     }
+
+
 }
-
-
-
-
 
 
 

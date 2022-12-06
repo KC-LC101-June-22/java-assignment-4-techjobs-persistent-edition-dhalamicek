@@ -14,9 +14,7 @@
         <li th:each="skill : ${skills}">
             <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
         </li>
-        <li th:each="skill : ${skills}">
-            <a th:href="'/jobs?skillId=' + ${skill.id}" th:text="${skill.name}"></a>
-        </li>
+
     </ul>
     <a th:href="@{'/skills/add'}">Add Skills</a>
 
