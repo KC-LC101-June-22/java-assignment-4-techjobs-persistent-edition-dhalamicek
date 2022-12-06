@@ -19,7 +19,7 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("strings")
+@RequestMapping("skills")
 public class SkillController {
 
 

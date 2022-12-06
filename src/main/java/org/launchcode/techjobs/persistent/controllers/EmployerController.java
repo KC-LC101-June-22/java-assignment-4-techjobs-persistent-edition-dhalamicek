@@ -36,7 +36,7 @@ public class EmployerController {
         model.addAttribute("title", "Add Employer");
         model.addAttribute("employer", new Employer());
         //model.addAttribute("location", employerRepository.findAll());
-        return "add";
+        return "employers/add";
     }
 
     @PostMapping("add")
